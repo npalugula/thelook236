@@ -12,6 +12,23 @@ view: products {
     type: string
     sql: ${TABLE}.brand ;;
   }
+#I put an extra s and now the filter is not working. Is it the problem?
+  dimension: test_bug {
+    description: "Test filter bug"
+    type: string
+    sql:
+        CASE (COALESCE(${category}, ${department}))
+          WHEN 'Plus' then 'Grosse taile'
+          WHEN 'MATERNITY' then 'marternité'
+          when 'Suits' then 'Complet'
+          when 'Underwear' then 'Sous-vêtements'
+          when 'Sockss' then 'Chaussette'
+        END;;
+    group_label: "Hello world"
+    alias: [vetement]
+
+  }
+
 
   dimension: category {
     type: string
