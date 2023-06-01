@@ -226,6 +226,13 @@ explore: user_data {
   }
 }
 
+explore: derived_table_new_lookml_runtime_test {
+  join: order_items {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${derived_table_new_lookml_runtime_test.ID} = ${order_items.id} ;;
+  }
+}
 explore: vvimgsrc1onerroralert2ll {}
 
 explore: xin_test_for_bug2 {}

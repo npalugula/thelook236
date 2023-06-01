@@ -1,5 +1,12 @@
 view: order_items {
-  sql_table_name: demo_db.order_items ;;
+  #sql_table_name: demo_db.order_items ;;
+  sql_table_name:
+  {% if order_items.returned_date._is_selected %}
+    `order_items`
+  {% else %}
+    `products`
+  {% endif %};;
+
   drill_fields: [id]
 
   dimension: id {
@@ -33,14 +40,17 @@ view: order_items {
   dimension_group: returned {
     type: time
     timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
+        date,
+        week,
+        week_of_year,
+        day_of_week,
+        month,
+        month_name,
+        quarter,
+        quarter_of_year,
+        year
     ]
+    datatype: datetime
     sql: ${TABLE}.returned_at ;;
   }
 
